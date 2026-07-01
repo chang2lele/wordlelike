@@ -8,32 +8,27 @@
       "date": "2026-07-01",
       "answer": "PLANT",
       "clues": [
-        "It grows from the ground."
+        "It grows in soil."
       ],
-      "difficulty": "medium"
+      "difficulty": "easy"
     },
     {
       "id": "crossword-20260701",
       "type": "mini-crossword",
       "date": "2026-07-01",
       "grid": [
-        "SPIN",
-        "PINE",
-        "INSE",
-        "NINE"
+        "C A T",
+        "A O O",
+        "T T E"
       ],
       "clues": {
         "across": [
-          "1 Across: To rotate around an axis",
-          "2 Across: A type of evergreen tree",
-          "3 Across: Into (archaic/poetic)",
-          "4 Across: Two times five"
+          "1 Across: Feline pet"
         ],
         "down": [
-          "1 Down: To turn quickly",
-          "2 Down: A small stream",
-          "3 Down: Inseparable parts",
-          "4 Down: Nine, repeated"
+          "1 Down: Cat's family member",
+          "2 Down: To hold",
+          "3 Down: Sea creature"
         ]
       }
     },
@@ -41,27 +36,27 @@
       "id": "anagram-20260701",
       "type": "anagram",
       "date": "2026-07-01",
-      "scrambled": "RSTLNE",
-      "answer": "LERNTS",
-      "hint": "Category: None"
+      "scrambled": "EARTH",
+      "answer": "HEART",
+      "hint": "Body organ"
     },
     {
       "id": "wordle-20260702",
       "type": "wordle",
       "date": "2026-07-02",
-      "answer": "BREAD",
+      "answer": "BRAIN",
       "clues": [
-        "A staple food made from flour."
+        "Controls your thoughts."
       ],
-      "difficulty": "easy"
+      "difficulty": "medium"
     },
     {
       "id": "anagram-20260702",
       "type": "anagram",
       "date": "2026-07-02",
-      "scrambled": "OCEANS",
-      "answer": "CANOE S",
-      "hint": "Category: Water Transport"
+      "scrambled": "NIGHT",
+      "answer": "THING",
+      "hint": "Object"
     }
   ]
 }
