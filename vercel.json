@@ -3,11 +3,23 @@
     { "source": "/css/(.*)", "destination": "/css/$1" },
     { "source": "/js/(.*)", "destination": "/js/$1" },
     { "source": "/data/(.*)", "destination": "/data/$1" },
+    { "source": "/favicon.svg", "destination": "/favicon.svg" },
+    { "source": "/og-image.svg", "destination": "/og-image.svg" },
+    { "source": "/robots.txt", "destination": "/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    { "source": "/puzzle-generator/(.*)", "destination": "/puzzle-generator/$1" },
     { "source": "/word-hurdle", "destination": "/word-hurdle.html" },
     { "source": "/mini-crossword", "destination": "/mini-crossword.html" },
+    { "source": "/word-search", "destination": "/word-search.html" },
+    { "source": "/anagram", "destination": "/anagram.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/blog", "destination": "/blog.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/games-like-wordle", "destination": "/games-like-wordle.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/:path*/", "destination": "/404.html", "status": 404 }
+  ],
+  "redirects": [
+    { "source": "/privacy-policy", "destination": "/privacy", "permanent": true }
   ]
 }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6C63FF"/>
+      <stop offset="100%" style="stop-color:#3F3D9E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- W logo -->
+  <rect x="520" y="150" width="160" height="160" rx="32" fill="white" opacity="0.15"/>
+  <text x="600" y="260" font-family="Arial,sans-serif" font-weight="bold" font-size="120" fill="#FFD700" text-anchor="middle">W</text>
+  <!-- Title -->
+  <text x="600" y="380" font-family="Arial,sans-serif" font-weight="bold" font-size="56" fill="white" text-anchor="middle">WordleLike</text>
+  <!-- Tagline -->
+  <text x="600" y="430" font-family="Arial,sans-serif" font-size="24" fill="#ccc" text-anchor="middle">Free Daily Word Puzzles &amp; Brain Games</text>
+  <!-- Bottom bar with icons -->
+  <text x="320" y="490" font-family="Arial,sans-serif" font-size="18" fill="#aaa" text-anchor="middle">🧩 Wordle</text>
+  <text x="460" y="490" font-family="Arial,sans-serif" font-size="18" fill="#aaa" text-anchor="middle">🔤 Word Hurdle</text>
+  <text x="600" y="490" font-family="Arial,sans-serif" font-size="18" fill="#aaa" text-anchor="middle">✏️ Mini Crossword</text>
+  <text x="740" y="490" font-family="Arial,sans-serif" font-size="18" fill="#aaa" text-anchor="middle">🔍 Word Search</text>
+  <text x="880" y="490" font-family="Arial,sans-serif" font-size="18" fill="#aaa" text-anchor="middle">🔄 Anagram</text>
+</svg>

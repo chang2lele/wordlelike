@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /css/
+Allow: /js/
+Allow: /data/
+Allow: /favicon.svg
+
+Disallow: /puzzle-generator/
+
+Sitemap: https://wordlelike.com/sitemap.xml

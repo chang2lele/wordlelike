@@ -15,15 +15,72 @@
     <meta name="description" content="Play the best games like Wordle for free. WordleLike offers daily word puzzles, word guessing games, and brain teasers. New puzzles every day!">
     <meta name="keywords" content="games like wordle, wordle alternatives, daily word puzzle, word games, free online puzzles">
     <link rel="canonical" href="https://wordlelike.com">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
-    <meta name="google-adsense-account" content="ca-pub-xxxxxxxxxxxxxx">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta property="og:site_name" content="WordleLike">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WordleLike - Best Games Like Wordle &amp; Daily Word Puzzles">
+    <meta property="og:description" content="Play the best games like Wordle for free. WordleLike offers daily word puzzles, word guessing games, and brain teasers. New puzzles every day!">
+    <meta property="og:url" content="https://wordlelike.com">
+    <meta property="og:image" content="https://wordlelike.com/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WordleLike - Best Games Like Wordle &amp; Daily Word Puzzles">
+    <meta name="twitter:description" content="Play the best games like Wordle for free. Daily word puzzles, no sign-up required.">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <!-- Google AdSense will be configured after approval -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "WordleLike",
         "description": "Play the best games like Wordle for free",
-        "url": "https://wordlelike.com"
+        "url": "https://wordlelike.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://wordlelike.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is WordleLike?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "WordleLike is a free daily word puzzle hub featuring Wordle, Word Hurdle, Mini Crossword, Word Search, and Anagram puzzles. All games are updated daily and require no sign-up."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is WordleLike free to play?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! WordleLike is completely free. No subscriptions, no paywalls, no sign-up required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How often are new puzzles added?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "New puzzles are generated daily using AI. Every day brings fresh Wordle, Word Hurdle, and Mini Crossword challenges."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What games does WordleLike offer?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "WordleLike offers a Wordle-style word guessing game, Word Hurdle (6-letter variant), Mini Crossword, Word Search, and Anagram Solver."
+                }
+            }
+        ]
     }
     </script>
 </head>
@@ -45,6 +102,8 @@
                 <a href="/" class="active">Home</a>
                 <a href="/word-hurdle">Word Hurdle</a>
                 <a href="/mini-crossword">Mini Crossword</a>
+                <a href="/word-search">Word Search</a>
+                <a href="/anagram">Anagram</a>
             </nav>
         </div>
     </header>
@@ -81,7 +140,7 @@
                     <div class="game-sidebar">
                         <div class="sidebar-box">
                             <h3>🏆 Leaderboard</h3>
-                            <div id="lb-list"><div class="lb-empty">Loading...</div></div>
+                            <div id="lb-list"><div class="lb-empty">Be the first to score! Play now 🎯</div></div>
                         </div>
                     </div>
                 </div>
@@ -146,6 +205,8 @@
         <div class="container">
             <p>&copy; 2026 WordleLike. All rights reserved.</p>
             <nav>
+                <a href="/about">About</a>
+                <a href="/blog">Blog</a>
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/contact">Contact</a>
             </nav>

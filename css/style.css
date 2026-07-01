@@ -36,6 +36,17 @@ body {
 }
 .logo {
     font-size: 1.5rem; font-weight: 800; text-decoration: none; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+}
+.logo::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 28px;
+    background: #6c5ce7;
+    border-radius: 6px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236c5ce7'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='bold' font-size='20' fill='white' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E");
+    background-size: contain;
+    flex-shrink: 0;
 }
 .logo span { color: var(--primary); }
 .nav a {
