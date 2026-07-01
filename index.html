@@ -20,6 +20,16 @@
     </script>
 </head>
 <body>
+    <!-- Name Input Overlay -->
+    <div id="name-overlay" class="name-overlay">
+        <div class="name-modal">
+            <h2>🧩 WordleLike</h2>
+            <p>Enter your name to start</p>
+            <input type="text" id="name-input" placeholder="Your name..." maxlength="15" autocomplete="off">
+            <button id="name-suggest" class="btn-hint" style="margin-bottom:10px;width:100%;">🎲 Random Name</button>
+            <button id="name-start" class="btn" disabled style="opacity:0.5;width:100%;text-align:center;">Start Playing</button>
+        </div>
+    </div>
     <header class="header">
         <div class="container">
             <a href="/" class="logo">Wordle<span>Like</span></a>
@@ -40,25 +50,35 @@
             </div>
         </section>
 
-        <section class="featured-game" id="play">
+        <div class="featured-game" id="play">
             <div class="container">
-                <h2>Today's Word Puzzle</h2>
-                <div class="game-container">
-                    <div id="wordle-game">
-                        <div id="game-header">
-                            <h3>WordleLike Daily</h3>
-                            <div style="display:flex;gap:6px;">
-                                <button id="hint-btn" class="btn-hint">💡 Hint (3)</button>
-                                <button id="new-game-btn" class="btn-small">New Game</button>
+                <div class="game-layout">
+                    <div class="game-main">
+                        <h2>Today's Word Puzzle</h2>
+                        <div class="game-container">
+                            <div id="wordle-game">
+                                <div id="game-header" style="display:none;">
+                                    <h3>WordleLike Daily</h3>
+                                    <div style="display:flex;gap:6px;">
+                                        <button id="hint-btn" class="btn-hint">💡 Hint (3)</button>
+                                        <button id="new-game-btn" class="btn-small">New Game</button>
+                                    </div>
+                                </div>
+                                <div id="board"></div>
+                                <div id="keyboard"></div>
+                                <div id="message"></div>
                             </div>
                         </div>
-                        <div id="board"></div>
-                        <div id="keyboard"></div>
-                        <div id="message"></div>
+                    </div>
+                    <div class="game-sidebar">
+                        <div class="sidebar-box">
+                            <h3>🏆 Leaderboard</h3>
+                            <div id="lb-list"><div class="lb-empty">Loading...</div></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
         <section class="games" id="games">
             <div class="container">
