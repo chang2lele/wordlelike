@@ -8,6 +8,7 @@ const board = document.getElementById('board');
 const keyboard = document.getElementById('keyboard');
 const message = document.getElementById('message');
 
+// Build board
 for (let r = 0; r < MAX_ATTEMPTS; r++) {
     const row = document.createElement('div');
     row.className = 'row'; row.id = `row-${r}`;
@@ -19,12 +20,12 @@ for (let r = 0; r < MAX_ATTEMPTS; r++) {
     board.appendChild(row);
 }
 
-const keys = [
-    ['Q','W','E','R','T','Y','U','I','O','P'],
-    ['A','S','D','F','G','H','J','K','L'],
-    ['Enter','Z','X','C','V','B','N','M','Backspace']
-];
-keys.forEach(row => {
+// Build keyboard
+[
+  ['Q','W','E','R','T','Y','U','I','O','P'],
+  ['A','S','D','F','G','H','J','K','L'],
+  ['Enter','Z','X','C','V','B','N','M','Backspace']
+].forEach(row => {
     const div = document.createElement('div');
     div.className = 'kb-row';
     row.forEach(key => {
@@ -48,14 +49,16 @@ function updateActiveTile() {
 
 function handleKey(key) {
     if (gameOver) return;
-    if (key === 'Enter') submitGuess();
-    else if (key === 'Backspace') {
+    if (key === 'Enter') { submitGuess(); return; }
+    if (key === 'Backspace') {
         if (currentTile > 0) {
             currentTile--;
             document.getElementById(`tile-${currentRow}-${currentTile}`).textContent = '';
         }
         updateActiveTile();
-    } else if (currentTile < 5) {
+        return;
+    }
+    if (currentTile < 5) {
         document.getElementById(`tile-${currentRow}-${currentTile}`).textContent = key;
         currentTile++;
         updateActiveTile();
@@ -83,10 +86,12 @@ function submitGuess() {
         else { result[i] = 'absent'; }
     }
     
+    // Apply colors to tiles
     document.querySelectorAll(`#row-${currentRow} .tile`).forEach((tile, i) => {
-        setTimeout(() => tile.classList.add(result[i]), i * 200);
+        tile.classList.add(result[i]);
     });
     
+    // Update keyboard colors
     document.querySelectorAll('.kb-key').forEach(btn => {
         const key = btn.dataset.key;
         if (!key) return;
@@ -101,16 +106,17 @@ function submitGuess() {
         }
     });
     
+    // Show result
     if (result.every(r => r === 'correct')) {
         gameOver = true;
-        setTimeout(() => showMessage('🎉 You got it!', 'win'), 1000);
+        showMessage('🎉 You got it!', 'win');
         return;
     }
     
     currentRow++; currentTile = 0;
     if (currentRow >= MAX_ATTEMPTS) {
         gameOver = true;
-        setTimeout(() => showMessage(`😔 The word was ${TARGET}`, 'lose'), 500);
+        showMessage(`😔 The word was ${TARGET}`, 'lose');
     }
     updateActiveTile();
 }
@@ -118,7 +124,6 @@ function submitGuess() {
 function showMessage(msg, type) {
     message.textContent = msg;
     message.className = type;
-    if (!type) setTimeout(() => { message.textContent = ''; message.className = ''; }, 2000);
 }
 
 document.addEventListener('keydown', e => {
@@ -129,9 +134,11 @@ document.addEventListener('keydown', e => {
 
 document.getElementById('new-game-btn').addEventListener('click', () => location.reload());
 
-async function loadDailyPuzzle() {
+// Load daily puzzle
+(async function() {
     try {
         const resp = await fetch('/data/latest.json');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const data = await resp.json();
         const wordle = data.puzzles.find(p => p.type === 'wordle');
         if (wordle && wordle.answer && wordle.answer.length === 5) {
@@ -140,11 +147,11 @@ async function loadDailyPuzzle() {
             if (wordle.clues && wordle.clues[0]) {
                 const clueEl = document.createElement('p');
                 clueEl.style.cssText = 'text-align:center;color:#636e72;font-size:0.85rem;margin-bottom:10px;';
-                clueEl.textContent = `💡 ${wordle.clues[0]}`;
+                clueEl.textContent = '💡 ' + wordle.clues[0];
                 document.getElementById('game-header').after(clueEl);
             }
         }
-    } catch (err) {}
-}
-
-loadDailyPuzzle();
+    } catch (err) {
+        showMessage('⚠️ Could not load puzzle, using fallback word', '');
+    }
+})();
