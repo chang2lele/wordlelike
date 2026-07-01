@@ -1,26 +1,15 @@
-const WORDS = [
-    'WORLD', 'HAPPY', 'HOUSE', 'MONEY', 'MUSIC', 'POWER', 'PEACE', 'DREAM',
-    'HEART', 'BRAIN', 'LIGHT', 'OCEAN', 'CLOUD', 'STONE', 'GRASS', 'LEMON',
-    'APPLE', 'BERRY', 'MANGO', 'PEACH', 'QUEEN', 'ROBOT', 'TIGER', 'UNCLE',
-    'VEGAS', 'WITCH', 'PIXEL', 'CANDY', 'DAISY', 'ELBOW', 'FLAME', 'GRAPE',
-    'JUICE', 'KAYAK', 'LEMUR', 'NOVEL', 'OTTER', 'PIANO', 'RIVER', 'SUGAR',
-    'TOWER', 'VIPER', 'WATER', 'BASIC', 'CLONE', 'DRIVE', 'EAGLE', 'FROST',
-    'GLOBE', 'HUMAN', 'IMAGE', 'JOKER', 'KNIFE', 'LUNAR', 'MAGIC', 'NIGHT',
-    'OPERA', 'PHONE', 'QUIET', 'ROBIN', 'SOLAR', 'TABLE', 'ULTRA', 'VOICE',
-    'WASTE', 'XENON', 'YACHT', 'ZEBRA', 'ALPHA', 'BLOOM', 'CHESS', 'DELTA',
-];
-
-const TARGET = WORDS[Math.floor(Math.random() * WORDS.length)];
+let TARGET = 'WORLD';
 const MAX_ATTEMPTS = 6;
 let currentRow = 0;
 let currentTile = 0;
 let gameOver = false;
+const WORDS = [];
 
 const board = document.getElementById('board');
 const keyboard = document.getElementById('keyboard');
 const message = document.getElementById('message');
 
-// Create board
+// Build board
 for (let r = 0; r < MAX_ATTEMPTS; r++) {
     const row = document.createElement('div');
     row.className = 'row';
@@ -34,7 +23,7 @@ for (let r = 0; r < MAX_ATTEMPTS; r++) {
     board.appendChild(row);
 }
 
-// Create keyboard
+// Build keyboard
 const keys = [
     ['Q','W','E','R','T','Y','U','I','O','P'],
     ['A','S','D','F','G','H','J','K','L'],
@@ -54,7 +43,6 @@ keys.forEach(row => {
     keyboard.appendChild(div);
 });
 
-// Focus row
 function updateActiveTile() {
     document.querySelectorAll('.tile').forEach(t => t.classList.remove('active'));
     if (!gameOver && currentRow < MAX_ATTEMPTS) {
@@ -62,75 +50,48 @@ function updateActiveTile() {
         if (tile) tile.classList.add('active');
     }
 }
-updateActiveTile();
 
 function handleKey(key) {
     if (gameOver) return;
-    
-    if (key === 'Enter') {
-        submitGuess();
-    } else if (key === 'Backspace') {
+    if (key === 'Enter') { submitGuess(); }
+    else if (key === 'Backspace') {
         if (currentTile > 0) {
             currentTile--;
-            const tile = document.getElementById(`tile-${currentRow}-${currentTile}`);
-            tile.textContent = '';
+            document.getElementById(`tile-${currentRow}-${currentTile}`).textContent = '';
         }
         updateActiveTile();
     } else if (currentTile < 5) {
-        const tile = document.getElementById(`tile-${currentRow}-${currentTile}`);
-        tile.textContent = key;
+        document.getElementById(`tile-${currentRow}-${currentTile}`).textContent = key;
         currentTile++;
         updateActiveTile();
     }
 }
 
 function submitGuess() {
-    if (currentTile !== 5) {
-        showMessage('Not enough letters', '');
-        return;
-    }
+    if (currentTile !== 5) { showMessage('Not enough letters', ''); return; }
     
     let guess = '';
     for (let c = 0; c < 5; c++) {
         guess += document.getElementById(`tile-${currentRow}-${c}`).textContent;
     }
     
-    if (!WORDS.includes(guess) && guess !== TARGET) {
-        showMessage('Not in word list', '');
-        return;
-    }
-    
     const targetArr = TARGET.split('');
     const result = [null, null, null, null, null];
     
-    // First pass: exact matches
     for (let i = 0; i < 5; i++) {
-        if (guess[i] === targetArr[i]) {
-            result[i] = 'correct';
-            targetArr[i] = null;
-        }
+        if (guess[i] === targetArr[i]) { result[i] = 'correct'; targetArr[i] = null; }
     }
-    // Second pass: present but wrong position
     for (let i = 0; i < 5; i++) {
         if (result[i] === 'correct') continue;
         const idx = targetArr.indexOf(guess[i]);
-        if (idx !== -1) {
-            result[i] = 'present';
-            targetArr[idx] = null;
-        } else {
-            result[i] = 'absent';
-        }
+        if (idx !== -1) { result[i] = 'present'; targetArr[idx] = null; }
+        else { result[i] = 'absent'; }
     }
     
-    // Animate tiles
-    const rowTiles = document.querySelectorAll(`#row-${currentRow} .tile`);
-    rowTiles.forEach((tile, i) => {
-        setTimeout(() => {
-            tile.classList.add(result[i]);
-        }, i * 200);
+    document.querySelectorAll(`#row-${currentRow} .tile`).forEach((tile, i) => {
+        setTimeout(() => tile.classList.add(result[i]), i * 200);
     });
     
-    // Update keyboard
     document.querySelectorAll('.kb-key').forEach(btn => {
         const key = btn.dataset.key;
         if (!key) return;
@@ -145,21 +106,17 @@ function submitGuess() {
         }
     });
     
-    // Check win
     if (result.every(r => r === 'correct')) {
         gameOver = true;
         setTimeout(() => showMessage('🎉 You got it!', 'win'), 1000);
         return;
     }
     
-    currentRow++;
-    currentTile = 0;
-    
+    currentRow++; currentTile = 0;
     if (currentRow >= MAX_ATTEMPTS) {
         gameOver = true;
         setTimeout(() => showMessage(`😔 The word was ${TARGET}`, 'lose'), 500);
     }
-    
     updateActiveTile();
 }
 
@@ -169,16 +126,34 @@ function showMessage(msg, type) {
     if (!type) setTimeout(() => { message.textContent = ''; message.className = ''; }, 2000);
 }
 
-// Keyboard input
 document.addEventListener('keydown', e => {
     if (e.key === 'Enter') handleKey('Enter');
     else if (e.key === 'Backspace') handleKey('Backspace');
     else if (/^[a-zA-Z]$/.test(e.key)) handleKey(e.key.toUpperCase());
 });
 
-// New game
-document.getElementById('new-game-btn').addEventListener('click', () => {
-    location.reload();
-});
+document.getElementById('new-game-btn').addEventListener('click', () => location.reload());
 
-console.log('Answer:', TARGET);
+// Load today's puzzle from AI-generated data
+async function loadDailyPuzzle() {
+    try {
+        const resp = await fetch('/data/latest.json');
+        const data = await resp.json();
+        const wordle = data.puzzles.find(p => p.type === 'wordle');
+        if (wordle && wordle.answer && wordle.answer.length === 5) {
+            TARGET = wordle.answer.toUpperCase();
+            document.querySelector('#game-header h3').textContent = `WordleLike Daily — ${wordle.date}`;
+            if (wordle.clues && wordle.clues[0]) {
+                const clueEl = document.createElement('p');
+                clueEl.style.cssText = 'text-align:center;color:#636e72;font-size:0.85rem;margin-bottom:10px;';
+                clueEl.textContent = `💡 ${wordle.clues[0]}`;
+                document.getElementById('game-header').after(clueEl);
+            }
+            console.log('🎯 Daily word:', TARGET);
+        }
+    } catch (err) {
+        console.log('Using fallback word');
+    }
+}
+
+loadDailyPuzzle();
