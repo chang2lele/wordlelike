@@ -1,0 +1,8 @@
+{
+  "name": "wordlelike-puzzle-generator",
+  "version": "1.0.0",
+  "description": "Daily puzzle generator for WordleLike.com using AI",
+  "scripts": {
+    "generate": "node generate-puzzles.js"
+  }
+}
