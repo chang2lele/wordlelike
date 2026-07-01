@@ -85,7 +85,7 @@ if (!board || !keyboard) return;
 // Build board
 for (var r = 0; r < MAX_ATTEMPTS; r++) {
     var row = document.createElement('div');
-    row.className = 'row'; row.id = 'wh-row-' + r;
+    row.className = 'row-6'; row.id = 'wh-row-' + r;
     for (var c = 0; c < WORD_LEN; c++) {
         var tile = document.createElement('div');
         tile.className = 'tile'; tile.id = 'wh-tile-' + r + '-' + c;
