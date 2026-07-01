@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Crossword - Daily Crossword Puzzle | WordleLike</title>
+    <meta name="description" content="Play Mini Crossword daily for free. Quick crossword puzzles perfect for word game lovers. New puzzles every day!">
+    <link rel="canonical" href="https://wordlelike.com/mini-crossword">
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Mini Crossword",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "any",
+        "description": "Daily mini crossword puzzles"
+    }
+    </script>
+</head>
+<body>
+    <!-- Name Overlay -->
+    <div id="name-overlay" class="name-overlay">
+        <div class="name-modal">
+            <h2>🧩 Mini Crossword</h2>
+            <p>Enter your name to start</p>
+            <input type="text" id="name-input" placeholder="Your name..." maxlength="15" autocomplete="off">
+            <button id="name-suggest" class="btn-hint" style="margin-bottom:10px;width:100%;">🎲 Random Name</button>
+            <button id="name-start" class="btn" disabled style="opacity:0.5;width:100%;text-align:center;">Start Playing</button>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">Wordle<span>Like</span></a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/word-hurdle">Word Hurdle</a>
+                <a href="/mini-crossword" class="active">Mini Crossword</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="featured-game" id="play">
+            <div class="container">
+                <div class="game-layout">
+                    <div class="game-main">
+                        <h1 style="margin-bottom:5px;">Mini Crossword</h1>
+                        <p style="text-align:center;color:#636e72;font-size:0.9rem;margin-bottom:20px;">Quick daily crossword puzzle</p>
+                        <div class="game-container">
+                            <div id="mc-game">
+                                <div id="game-header" style="display:none;">
+                                    <h3>Mini Crossword Daily</h3>
+                                    <div style="display:flex;gap:6px;">
+                                        <button id="hint-btn" class="btn-hint">💡 Hint (3)</button>
+                                        <button id="new-game-btn" class="btn-small">New Game</button>
+                                    </div>
+                                </div>
+                                <div id="crossword-grid"></div>
+                                <div id="crossword-clues"></div>
+                                <div id="message"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-sidebar">
+                        <div class="sidebar-box">
+                            <h3>🏆 Leaderboard</h3>
+                            <div id="lb-list"><div class="lb-empty">Loading...</div></div>
+                        </div>
+                        <div class="sidebar-box" style="margin-top:12px;">
+                            <h3>📖 How to Play</h3>
+                            <p style="font-size:0.85rem;color:#636e72;line-height:1.7;">
+                                Fill the grid by solving the clues.<br>
+                                Click a cell to select it, then type letters.<br><br>
+                                <a href="/" style="color:#6c5ce7;">← Play WordleLike (5-letter)</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="container">
+                <article>
+                    <h2>Mini Crossword - Daily Word Puzzle</h2>
+                    <p>Our <strong>Mini Crossword</strong> is a quick daily puzzle for word game enthusiasts. With a compact 5x5 grid, it's the perfect brain workout for your morning coffee break.</p>
+                    <h3>Why Play Mini Crossword?</h3>
+                    <ul>
+                        <li>Quick to solve - only takes 2-3 minutes</li>
+                        <li>New puzzle every day</li>
+                        <li>Perfect for crossword beginners</li>
+                    </ul>
+                    <p>Looking for more challenges? Try <a href="/">WordleLike (5-letter)</a> or <a href="/word-hurdle">Word Hurdle (6-letter)</a>.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 WordleLike. All rights reserved.</p>
+            <nav>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="/js/minicrossword.js"></script>
+</body>
+</html>
