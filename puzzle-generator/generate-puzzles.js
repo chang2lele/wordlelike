@@ -1,63 +1,27 @@
-// Puzzle generator for WordleLike.com
-// Uses any OpenAI-compatible API (Agnes AI, OpenAI, etc.)
-// Run: node generate-puzzles.js
-// Output: ../data/puzzles.json
-
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-// ⚠️ Replace with your actual API key from agnes-ai.com
-const API_KEY = process.env.AI_API_KEY || 'your-key-here';
-const API_URL = process.env.AI_API_URL || 'https://agnes-ai.com/v1/chat/completions';
-const MODEL = process.env.AI_MODEL || 'gpt-4o-mini'; // Adjust to models available on Agnes AI
+const API_KEY = process.env.AI_API_KEY;
+const API_URL = process.env.AI_API_URL || 'https://apihub.agnes-ai.com/v1/chat/completions';
+const MODEL = process.env.AI_MODEL || 'agnes-2.0-flash';
 
 const PUZZLE_COUNT = 5;
 
-const prompt = `You are a puzzle generator. Generate ${PUZZLE_COUNT} word puzzles for today (${new Date().toISOString().split('T')[0]}). 
-
-Return ONLY valid JSON array (no markdown, no code fences):
+const prompt = `You are a puzzle generator. Generate ${PUZZLE_COUNT} word puzzles for today (${new Date().toISOString().split('T')[0]}). Return ONLY valid JSON array:
 [
-  {
-    "id": "wordle-YYYYMMDD",
-    "type": "wordle",
-    "date": "YYYY-MM-DD",
-    "answer": "5-letter uppercase word",
-    "clues": ["A short clue for the word"],
-    "difficulty": "medium"
-  },
-  {
-    "id": "crossword-YYYYMMDD", 
-    "type": "mini-crossword",
-    "date": "YYYY-MM-DD",
-    "grid": ["5x5 grid rows as string of uppercase letters"],
-    "clues": {
-      "across": ["1 Across clue"],
-      "down": ["1 Down clue"]
-    }
-  },
-  {
-    "id": "anagram-YYYYMMDD",
-    "type": "anagram",
-    "date": "YYYY-MM-DD",
-    "scrambled": "RSTLNE",
-    "answer": "LERNTS",
-    "hint": "Category or theme"
-  }
+  {"id":"wordle-YYYYMMDD","type":"wordle","date":"YYYY-MM-DD","answer":"5-letter uppercase word","clues":["Short clue"],"difficulty":"medium"},
+  {"id":"crossword-YYYYMMDD","type":"mini-crossword","date":"YYYY-MM-DD","grid":["ROW1","ROW2","ROW3","ROW4","ROW5"],"clues":{"across":["1 Across"],"down":["1 Down"]}},
+  {"id":"anagram-YYYYMMDD","type":"anagram","date":"YYYY-MM-DD","scrambled":"RSTLNE","answer":"LERNTS","hint":"Category"}
 ]
-
-Rules:
-- Words must be common English words (5-7 letters)
-- No obscure, offensive, or trademarked words
-- Puzzles should be solvable by average players
-- Vary difficulty across puzzles`;
+Rules: Common English words, no offensive/trademarked, solvable, vary difficulty.`;
 
 function makeRequest() {
   return new Promise((resolve, reject) => {
     const data = JSON.stringify({
       model: MODEL,
       messages: [
-        { role: 'system', content: 'You are a word puzzle generator. Always respond with valid JSON only.' },
+        { role: 'system', content: 'You are a word puzzle generator. Respond with valid JSON only.' },
         { role: 'user', content: prompt }
       ],
       temperature: 0.7,
@@ -67,7 +31,7 @@ function makeRequest() {
     const url = new URL(API_URL);
     const options = {
       hostname: url.hostname,
-      path: url.pathname,
+      path: url.pathname + url.search,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,14 +46,14 @@ function makeRequest() {
       res.on('end', () => {
         try {
           const json = JSON.parse(body);
-          const content = json.choices?.[0]?.message?.content || '';
-          resolve(content);
+          const content = json.choices?.[0]?.message?.content;
+          if (content) resolve(content);
+          else reject(new Error('No content in response: ' + JSON.stringify(json).slice(0, 200)));
         } catch (e) {
           reject(new Error(`Parse error: ${e.message}\nBody: ${body.slice(0, 200)}`));
         }
       });
     });
-
     req.on('error', reject);
     req.write(data);
     req.end();
@@ -99,44 +63,23 @@ function makeRequest() {
 async function main() {
   console.log('🤖 Generating daily puzzles...');
   
-  // Create data directory
   const dataDir = path.join(__dirname, '..', 'data');
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
   try {
     const content = await makeRequest();
-    
-    // Clean response in case it has markdown fences
-    let clean = content.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    let clean = content.replace(/```json?\n?/g, '').replace(/```\n?/g, '').trim();
     const puzzles = JSON.parse(clean);
-    
-    // Validate
-    if (!Array.isArray(puzzles) || puzzles.length === 0) {
-      throw new Error('Invalid puzzle format');
-    }
+    if (!Array.isArray(puzzles) || puzzles.length === 0) throw new Error('Invalid format');
 
-    // Save with date-based filename
     const today = new Date().toISOString().split('T')[0];
-    const outputPath = path.join(dataDir, `puzzles-${today}.json`);
+    const output = { generated: today, count: puzzles.length, puzzles };
     
-    const output = {
-      generated: today,
-      count: puzzles.length,
-      puzzles: puzzles
-    };
+    fs.writeFileSync(path.join(dataDir, `puzzles-${today}.json`), JSON.stringify(output, null, 2));
+    console.log(`✅ Generated ${puzzles.length} puzzles`);
     
-    fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
-    console.log(`✅ Generated ${puzzles.length} puzzles → data/puzzles-${today}.json`);
-    
-    // Also update latest.json for the site to read
-    fs.writeFileSync(
-      path.join(dataDir, 'latest.json'),
-      JSON.stringify(output, null, 2)
-    );
-    console.log(`✅ Updated data/latest.json`);
-    
+    fs.writeFileSync(path.join(dataDir, 'latest.json'), JSON.stringify(output, null, 2));
+    console.log('✅ Updated data/latest.json');
   } catch (err) {
     console.error('❌ Error:', err.message);
     process.exit(1);
