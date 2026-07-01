@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Hurdle - 6-Letter Word Game | WordleLike</title>
+    <meta name="description" content="Play Word Hurdle, the 6-letter word guessing game. A harder Wordle variant that challenges your vocabulary. Free daily puzzles!">
+    <link rel="canonical" href="https://wordlelike.com/word-hurdle">
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Word Hurdle",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "any",
+        "description": "A 6-letter word guessing game"
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">Wordle<span>Like</span></a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/word-hurdle" class="active">Word Hurdle</a>
+                <a href="/mini-crossword">Mini Crossword</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="featured-game" id="play">
+            <div class="container">
+                <div class="game-layout">
+                    <div class="game-main">
+                        <h1 style="margin-bottom:5px;">Word Hurdle</h1>
+                        <p style="text-align:center;color:#636e72;font-size:0.9rem;margin-bottom:20px;">Guess the 6-letter word</p>
+                        <div class="game-container">
+                            <div id="wh-game">
+                                <div id="game-header" style="display:none;">
+                                    <h3>Word Hurdle Daily</h3>
+                                    <div style="display:flex;gap:6px;">
+                                        <button id="hint-btn" class="btn-hint">💡 Hint (3)</button>
+                                        <button id="new-game-btn" class="btn-small">New Game</button>
+                                    </div>
+                                </div>
+                                <div id="board-6"></div>
+                                <div id="keyboard-6"></div>
+                                <div id="message"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-sidebar">
+                        <div class="sidebar-box">
+                            <h3>🏆 Leaderboard</h3>
+                            <div id="lb-list"><div class="lb-empty">Loading...</div></div>
+                        </div>
+                        <div class="sidebar-box" style="margin-top:12px;">
+                            <h3>📖 How to Play</h3>
+                            <p style="font-size:0.85rem;color:#636e72;line-height:1.7;">
+                                Guess the <strong>6-letter word</strong> in 6 tries.<br>
+                                🟩 Green = correct letter & position<br>
+                                🟡 Yellow = correct letter, wrong position<br>
+                                ⬜ Gray = letter not in word<br><br>
+                                <a href="/" style="color:#6c5ce7;">← Play WordleLike (5-letter)</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="container">
+                <article>
+                    <h2>What Is Word Hurdle?</h2>
+                    <p>Word Hurdle is a challenging <strong>6-letter word game</strong> for players who find Wordle too easy. With an extra letter to guess, every round becomes a tougher test of your vocabulary.</p>
+                    <h3>Strategy Tips</h3>
+                    <ul>
+                        <li>Start with words that have common vowels (A, E, I, O, U)</li>
+                        <li>Use consonants like T, N, S, R in your first guess</li>
+                        <li>Pay attention to letter patterns - 6-letter words often end in -ING, -TION, -ED</li>
+                    </ul>
+                    <h3>More Word Games</h3>
+                    <p>Try our other free puzzles: <a href="/">WordleLike (5-letter)</a> and Mini Crossword.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 WordleLike. All rights reserved.</p>
+            <nav>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="/js/wordhurdle.js"></script>
+</body>
+</html>
