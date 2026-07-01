@@ -1,8 +1,11 @@
 name: Generate Daily Puzzles
 on:
   schedule:
-    - cron: '0 6 * * *'   # Runs daily at 6 AM UTC = 2 PM Beijing / 11 PM PT
-  workflow_dispatch:       # Allow manual trigger
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   generate:
@@ -13,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       
       - name: Install dependencies
         run: cd puzzle-generator && npm install
@@ -22,12 +25,15 @@ jobs:
         run: cd puzzle-generator && node generate-puzzles.js
         env:
           AI_API_KEY: ${{ secrets.AI_API_KEY }}
-          AI_API_URL: ${{ secrets.AI_API_URL || 'https://agnes-ai.com/v1/chat/completions' }}
-          AI_MODEL: ${{ secrets.AI_MODEL || 'gpt-4o-mini' }}
+          AI_API_URL: ${{ secrets.AI_API_URL }}
+          AI_MODEL: ${{ secrets.AI_MODEL }}
       
       - name: Commit and push puzzles
         run: |
           git config user.name "WordleLike Bot"
           git config user.email "bot@wordlelike.com"
           git add data/
-          git diff --staged --quiet || (git commit -m "Daily puzzle update $(date +%Y-%m-%d)" && git push)
+          git diff --staged --quiet || (
+            git commit -m "Daily puzzle update $(date +%Y-%m-%d)" &&
+            git push
+          )
