@@ -1,5 +1,9 @@
 {
   "rewrites": [
+    { "source": "/css/(.*)", "destination": "/css/$1" },
+    { "source": "/js/(.*)", "destination": "/js/$1" },
+    { "source": "/data/(.*)", "destination": "/data/$1" },
+    { "source": "/word-hurdle", "destination": "/word-hurdle.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
