@@ -5,6 +5,8 @@
     { "source": "/data/(.*)", "destination": "/data/$1" },
     { "source": "/word-hurdle", "destination": "/word-hurdle.html" },
     { "source": "/mini-crossword", "destination": "/mini-crossword.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/contact", "destination": "/contact.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
