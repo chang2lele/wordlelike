@@ -11,10 +11,11 @@ const PUZZLE_COUNT = 5;
 const prompt = `You are a puzzle generator. Generate ${PUZZLE_COUNT} word puzzles for today (${new Date().toISOString().split('T')[0]}). Return ONLY valid JSON array:
 [
   {"id":"wordle-YYYYMMDD","type":"wordle","date":"YYYY-MM-DD","answer":"5-letter uppercase word","clues":["Short clue"],"difficulty":"medium"},
+  {"id":"wh-YYYYMMDD","type":"wordhurdle","date":"YYYY-MM-DD","answer":"6-letter uppercase word","clues":["Short clue"],"difficulty":"hard"},
   {"id":"crossword-YYYYMMDD","type":"mini-crossword","date":"YYYY-MM-DD","grid":["ROW1","ROW2","ROW3","ROW4","ROW5"],"clues":{"across":["1 Across"],"down":["1 Down"]}},
   {"id":"anagram-YYYYMMDD","type":"anagram","date":"YYYY-MM-DD","scrambled":"RSTLNE","answer":"LERNTS","hint":"Category"}
 ]
-Rules: Common English words, no offensive/trademarked, solvable, vary difficulty.`;
+Rules: Common English words, no offensive/trademarked, solvable, vary difficulty. Include AT LEAST one 6-letter wordle (type: wordhurdle).`;
 
 function makeRequest() {
   return new Promise((resolve, reject) => {
