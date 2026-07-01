@@ -12,10 +12,19 @@ const prompt = `You are a puzzle generator. Generate ${PUZZLE_COUNT} word puzzle
 [
   {"id":"wordle-YYYYMMDD","type":"wordle","date":"YYYY-MM-DD","answer":"5-letter uppercase word","clues":["Short clue"],"difficulty":"medium"},
   {"id":"wh-YYYYMMDD","type":"wordhurdle","date":"YYYY-MM-DD","answer":"6-letter uppercase word","clues":["Short clue"],"difficulty":"hard"},
-  {"id":"crossword-YYYYMMDD","type":"mini-crossword","date":"YYYY-MM-DD","grid":["ROW1","ROW2","ROW3","ROW4","ROW5"],"clues":{"across":["1 Across"],"down":["1 Down"]}},
+  {"id":"crossword-YYYYMMDD","type":"mini-crossword","date":"YYYY-MM-DD","grid":["APPLE","H...","...R.","...E."],"numbers":{"A1":"1-Across: A fruit","H2":"2-Down: A greeting"},"answers":{"00":"A","01":"P","02":"P","03":"L","04":"E","10":"H","20":"A","30":"R","31":"E","40":"E"}},
   {"id":"anagram-YYYYMMDD","type":"anagram","date":"YYYY-MM-DD","scrambled":"RSTLNE","answer":"LERNTS","hint":"Category"}
 ]
-Rules: Common English words, no offensive/trademarked, solvable, vary difficulty. Include AT LEAST one 6-letter wordle (type: wordhurdle).`;
+
+MINI-CROSSWORD RULES (5x5 grid):
+- 5 rows of exactly 5 characters each
+- Use . for black/unused cells, letters for playable cells
+- Include "numbers" with position prefix (e.g. "A1" for Across-1, "D2" for Down-2)
+- Include "answers" with cell positions as keys and letters as values
+- Must be a real crossword with valid intersections
+- Clues should be clear and fair
+
+Include AT LEAST one 6-letter wordle (type: wordhurdle) and one mini crossword.`;
 
 function makeRequest() {
   return new Promise((resolve, reject) => {
