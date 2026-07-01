@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | WordleLike</title>
+    <meta name="description" content="Contact WordleLike - get in touch with us">
+    <link rel="canonical" href="https://wordlelike.com/contact">
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="robots" content="index, follow">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">Wordle<span>Like</span></a>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/word-hurdle">Word Hurdle</a>
+                <a href="/mini-crossword">Mini Crossword</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content" style="border-top:none;padding-top:40px;">
+            <div class="container" style="max-width:700px;">
+                <h1 style="font-size:2rem;margin-bottom:10px;">Contact Us</h1>
+                <p style="color:#636e72;margin-bottom:30px;">Have feedback or suggestions? We'd love to hear from you.</p>
+
+                <div style="background:#f8f9fa;border-radius:12px;padding:30px;border:1px solid #dfe6e9;">
+                    <form id="contact-form" onsubmit="return handleSubmit(event)">
+                        <div style="margin-bottom:16px;">
+                            <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem;">Your Email</label>
+                            <input type="email" id="contact-email" required placeholder="your@email.com" style="width:100%;padding:12px 16px;border:2px solid #dfe6e9;border-radius:8px;font-size:1rem;outline:none;box-sizing:border-box;">
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem;">Message</label>
+                            <textarea id="contact-message" required rows="5" placeholder="Tell us what's on your mind..." style="width:100%;padding:12px 16px;border:2px solid #dfe6e9;border-radius:8px;font-size:1rem;outline:none;resize:vertical;font-family:inherit;box-sizing:border-box;"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width:100%;text-align:center;border:none;cursor:pointer;">Send Message</button>
+                        <p id="contact-status" style="text-align:center;margin-top:12px;font-weight:600;display:none;"></p>
+                    </form>
+                </div>
+
+                <div style="margin-top:30px;padding:20px;background:#fff;border-radius:12px;border:1px solid #dfe6e9;">
+                    <h3 style="margin-bottom:8px;">Other Ways to Reach Us</h3>
+                    <p style="color:#636e72;line-height:1.8;">
+                        📧 Email: contact [at] wordlelike.com<br>
+                        🐦 Twitter: <a href="https://twitter.com/wordlelike" rel="nofollow">@wordlelike</a><br>
+                        📝 Found a bug? Report it on <a href="https://github.com/chang2lele/wordlelike/issues" rel="nofollow">GitHub Issues</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 WordleLike. All rights reserved.</p>
+            <nav>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+    function handleSubmit(e) {
+        e.preventDefault();
+        var email = document.getElementById('contact-email').value;
+        var msg = document.getElementById('contact-message').value;
+        var status = document.getElementById('contact-status');
+        
+        // Simple mailto fallback
+        var mailto = 'mailto:contact@wordlelike.com?subject=WordleLike Feedback&body=' + encodeURIComponent('From: ' + email + '\n\n' + msg);
+        window.location.href = mailto;
+        
+        status.style.display = 'block';
+        status.style.color = '#00b894';
+        status.textContent = '✅ Opening your email client...';
+        return false;
+    }
+    </script>
+</body>
+</html>
