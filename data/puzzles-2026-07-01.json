@@ -1,0 +1,67 @@
+{
+  "generated": "2026-07-01",
+  "count": 5,
+  "puzzles": [
+    {
+      "id": "wordle-20260701",
+      "type": "wordle",
+      "date": "2026-07-01",
+      "answer": "PLANT",
+      "clues": [
+        "It grows from the ground."
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "crossword-20260701",
+      "type": "mini-crossword",
+      "date": "2026-07-01",
+      "grid": [
+        "SPIN",
+        "PINE",
+        "INSE",
+        "NINE"
+      ],
+      "clues": {
+        "across": [
+          "1 Across: To rotate around an axis",
+          "2 Across: A type of evergreen tree",
+          "3 Across: Into (archaic/poetic)",
+          "4 Across: Two times five"
+        ],
+        "down": [
+          "1 Down: To turn quickly",
+          "2 Down: A small stream",
+          "3 Down: Inseparable parts",
+          "4 Down: Nine, repeated"
+        ]
+      }
+    },
+    {
+      "id": "anagram-20260701",
+      "type": "anagram",
+      "date": "2026-07-01",
+      "scrambled": "RSTLNE",
+      "answer": "LERNTS",
+      "hint": "Category: None"
+    },
+    {
+      "id": "wordle-20260702",
+      "type": "wordle",
+      "date": "2026-07-02",
+      "answer": "BREAD",
+      "clues": [
+        "A staple food made from flour."
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "anagram-20260702",
+      "type": "anagram",
+      "date": "2026-07-02",
+      "scrambled": "OCEANS",
+      "answer": "CANOE S",
+      "hint": "Category: Water Transport"
+    }
+  ]
+}
