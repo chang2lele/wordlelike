@@ -3,27 +3,22 @@ const MAX_ATTEMPTS = 6;
 let currentRow = 0;
 let currentTile = 0;
 let gameOver = false;
-const WORDS = [];
 
 const board = document.getElementById('board');
 const keyboard = document.getElementById('keyboard');
 const message = document.getElementById('message');
 
-// Build board
 for (let r = 0; r < MAX_ATTEMPTS; r++) {
     const row = document.createElement('div');
-    row.className = 'row';
-    row.id = `row-${r}`;
+    row.className = 'row'; row.id = `row-${r}`;
     for (let c = 0; c < 5; c++) {
         const tile = document.createElement('div');
-        tile.className = 'tile';
-        tile.id = `tile-${r}-${c}`;
+        tile.className = 'tile'; tile.id = `tile-${r}-${c}`;
         row.appendChild(tile);
     }
     board.appendChild(row);
 }
 
-// Build keyboard
 const keys = [
     ['Q','W','E','R','T','Y','U','I','O','P'],
     ['A','S','D','F','G','H','J','K','L'],
@@ -53,7 +48,7 @@ function updateActiveTile() {
 
 function handleKey(key) {
     if (gameOver) return;
-    if (key === 'Enter') { submitGuess(); }
+    if (key === 'Enter') submitGuess();
     else if (key === 'Backspace') {
         if (currentTile > 0) {
             currentTile--;
@@ -134,7 +129,6 @@ document.addEventListener('keydown', e => {
 
 document.getElementById('new-game-btn').addEventListener('click', () => location.reload());
 
-// Load today's puzzle from AI-generated data
 async function loadDailyPuzzle() {
     try {
         const resp = await fetch('/data/latest.json');
@@ -149,11 +143,8 @@ async function loadDailyPuzzle() {
                 clueEl.textContent = `💡 ${wordle.clues[0]}`;
                 document.getElementById('game-header').after(clueEl);
             }
-            console.log('🎯 Daily word:', TARGET);
         }
-    } catch (err) {
-        console.log('Using fallback word');
-    }
+    } catch (err) {}
 }
 
 loadDailyPuzzle();
