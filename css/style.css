@@ -141,7 +141,7 @@ section:nth-child(even) { background: var(--canvas); }
   font-size: 1.75rem; font-weight: 700; letter-spacing: -0.5px;
   margin-bottom: 8px;
 }
-.section-header p { color: var(--mute); font-size: 0.95rem; max-width: 400px; margin: 0 auto; }
+.section-header p { color: #666; font-size: 0.95rem; max-width: 400px; margin: 0 auto; }
 
 /* === Game Grid === */
 .game-grid {
@@ -177,10 +177,10 @@ section:nth-child(even) { background: var(--canvas); }
 .wh { background: var(--game-wh); }
 .mc { background: var(--game-mc); }
 .ws { background: var(--game-ws); }
-.an { background: var(--game-an); }
+.an { background: #e67e22; }
 .wl { background: var(--game-wl); }
 .game-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
-.game-card p { font-size: 0.8rem; color: var(--mute); line-height: 1.4; }
+.game-card p { font-size: 0.85rem; color: #555; line-height: 1.4; }
 
 /* === Featured Game === */
 .featured-game { background: var(--canvas); }
