@@ -6,9 +6,11 @@
       "id": "wordle-20260712",
       "type": "wordle",
       "date": "2026-07-12",
-      "answer": "SMILE",
+      "answer": "OCEAN",
       "clues": [
-        "A 5-letter word: SMILE"
+        "A 5-letter word starting with O",
+        "Ends with \"N\"",
+        "Meaning: related to ocean"
       ],
       "difficulty": "medium"
     },
@@ -16,9 +18,11 @@
       "id": "wh-20260712",
       "type": "wordhurdle",
       "date": "2026-07-12",
-      "answer": "MOUNTS",
+      "answer": "FROSTY",
       "clues": [
-        "Starts with M, ends with S"
+        "A 6-letter word starting with F",
+        "Ends with \"Y\"",
+        "Category: frosty related"
       ],
       "difficulty": "hard"
     },
@@ -27,53 +31,68 @@
       "type": "mini-crossword",
       "date": "2026-07-12",
       "grid": [
-        "DREAM",
-        "..R..",
-        "..E..",
-        "..A..",
-        "..M.."
+        "BRAVE",
+        "O....",
+        "..D..",
+        ".E...",
+        "..R.."
       ],
       "numbers": {
-        "A1": "1-Across: dream",
-        "D3": "2-Down: dream"
+        "A1": "1-Across: Courageous",
+        "D2": "2-Down: Bird sound"
       },
       "answers": {
-        "12": "R",
-        "22": "E",
-        "32": "A",
-        "42": "M",
-        "00": "D",
+        "10": "O",
+        "20": "D",
+        "30": "E",
+        "40": "R",
+        "00": "B",
         "01": "R",
-        "02": "E",
-        "03": "A",
-        "04": "M"
-      }
+        "02": "A",
+        "03": "V",
+        "04": "E"
+      },
+      "clues": [
+        "Across 1: Courageous",
+        "Down 2: Bird sound",
+        "Grid is 5x5 with black cells marked as ."
+      ]
     },
     {
       "id": "anagram-20260712",
       "type": "anagram",
       "date": "2026-07-12",
-      "scrambled": "LISTEN",
-      "answer": "SILENT",
-      "hint": "Quiet"
+      "scrambled": "EILNST",
+      "answer": "TINSEL",
+      "hint": "Unscramble the letters",
+      "clues": [
+        "Scrambled: EILNST",
+        "Length: 6 letters",
+        "Hint: tinsel related"
+      ]
     },
     {
       "id": "wordsearch-20260712",
       "type": "wordsearch",
       "date": "2026-07-12",
       "grid": [
-        "VLJUE",
-        "HYMSA",
-        "BVIYN",
-        "HNOEX",
-        "XABQE"
+        "APPLE",
+        "BANAN",
+        "CHERR",
+        "DURIA",
+        "ELDER"
       ],
       "words": [
-        "BLUE",
-        "RED",
-        "GREEN"
+        "APPLE",
+        "BANANA",
+        "CHERRY"
       ],
-      "theme": "Colors"
+      "theme": "Fruits",
+      "clues": [
+        "Theme: Fruits",
+        "Find 3 hidden words",
+        "Grid size: 5x5 letters"
+      ]
     }
   ]
 }

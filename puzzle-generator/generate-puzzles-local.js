@@ -1,151 +1,146 @@
 const fs = require('fs');
 const path = require('path');
 
-// 预设词库
-const WORDLE_WORDS = ['APPLE', 'HOUSE', 'WATER', 'MUSIC', 'LIGHT', 'SMILE', 'DREAM', 'HEART', 'WORLD', 'PEACE'];
-const WORDHURDLE_WORDS = ['GARDEN', 'PUZZLE', 'BRIGHT', 'FOREST', 'OCEANS', 'MOUNTS', 'RIVERS', 'NATURE', 'SUNSET', 'MEADOW'];
-const ANAGRAM_PAIRS = [
-  { scrambled: 'RSTLNE', answer: 'STERNL', hint: 'Adjective' },
-  { scrambled: 'AEIOU', answer: 'AUDIO', hint: 'Sound' },
-  { scrambled: 'LISTEN', answer: 'SILENT', hint: 'Quiet' },
-  { scrambled: 'TRIANGLE', answer: 'INTEGRAL', hint: 'Math' },
-  { scrambled: 'PARLIAMENT', answer: 'PARTIALMEN', hint: 'Politics' }
+// 本地词汇库
+const WORDLE_WORDS = ['APPLE', 'BRAVE', 'CRANE', 'DREAM', 'EAGLE', 'FLAME', 'GRACE', 'HEART', 'IVORY', 'JUICE', 'KNIGHT', 'LEMON', 'MAGIC', 'NOBLE', 'OCEAN', 'PEACE', 'QUEEN', 'RIVER', 'SMILE', 'TIGER', 'UNITY', 'VIVID', 'WATER', 'XENON', 'YOUTH', 'ZEBRA'];
+const WORDHURDLE_WORDS = ['GARDEN', 'BUTTER', 'CANYON', 'DESERT', 'EAGLES', 'FROSTY', 'GALAXY', 'HARBOR', 'ISLAND', 'JUNGLE', 'KETTLE', 'LODGES', 'MEADOW', 'NATURE', 'ORANGE', 'PIRATE', 'QUARTZ', 'RADIUS', 'SAVORY', 'TROPIC', 'UNIQUE', 'VELVET', 'WILLOW', 'XERIES', 'YELLOW', 'ZEPHYR'];
+const ANAGRAM_WORDS = ['STERNL', 'RETAIL', 'SILENT', 'LISTEN', 'ENLIST', 'TINSEL', 'INLETS', 'SLEETS', 'TELNIS', 'NESTLE'];
+const ANAGRAM_SCRAMBLED = ['RSTLNE', 'AILRTE', 'EILNST', 'EILNST', 'EILNST', 'EILNST', 'EILNST', 'EELSST', 'EILNST', 'EELNST'];
+const CROSSWORD_GRIDS = [
+  {
+    grid: ['APPLE', 'H....', '..R..', '.A...', '..E..'],
+    numbers: {'A1': '1-Across: A fruit', 'D2': '2-Down: Greeting'},
+    answers: {'00': 'A', '01': 'P', '02': 'P', '03': 'L', '04': 'E', '10': 'H', '20': 'R', '30': 'A', '40': 'E'}
+  },
+  {
+    grid: ['BRAVE', 'O....', '..D..', '.E...', '..R..'],
+    numbers: {'A1': '1-Across: Courageous', 'D2': '2-Down: Bird sound'},
+    answers: {'00': 'B', '01': 'R', '02': 'A', '03': 'V', '04': 'E', '10': 'O', '20': 'D', '30': 'E', '40': 'R'}
+  },
+  {
+    grid: ['CRANE', 'A....', '..T..', '.S...', '..E..'],
+    numbers: {'A1': '1-Across: A bird', 'D2': '2-Down: Article'},
+    answers: {'00': 'C', '01': 'R', '02': 'A', '03': 'N', '04': 'E', '10': 'A', '20': 'T', '30': 'S', '40': 'E'}
+  }
+];
+const WORDSEARCH_GRIDS = [
+  {
+    grid: ['HELLO', 'WORLD', 'ABCDE', 'FGHIJ', 'KLMNO'],
+    words: ['HELLO', 'WORLD'],
+    theme: 'Greetings'
+  },
+  {
+    grid: ['APPLE', 'BANAN', 'CHERR', 'DURIA', 'ELDER'],
+    words: ['APPLE', 'BANANA', 'CHERRY'],
+    theme: 'Fruits'
+  }
 ];
 
-function randomChoice(arr) {
+function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function generateWordle() {
-  const answer = randomChoice(WORDLE_WORDS);
-  const clues = [
-    `A 5-letter word: ${answer}`,
-    `Common word, ${answer.length} letters`,
-    `Starts with ${answer[0]}, ends with ${answer[answer.length-1]}`
-  ];
-  return {
-    id: `wordle-${DATE_ID}`,
-    type: 'wordle',
-    date: TODAY,
-    answer,
-    clues: [randomChoice(clues)],
-    difficulty: 'medium'
-  };
-}
-
-function generateWordHurdle() {
-  const answer = randomChoice(WORDHURDLE_WORDS);
-  const clues = [
-    `A 6-letter word: ${answer}`,
-    `Related to: ${answer.toLowerCase()}`,
-    `Starts with ${answer[0]}, ends with ${answer[answer.length-1]}`
-  ];
-  return {
-    id: `wh-${DATE_ID}`,
-    type: 'wordhurdle',
-    date: TODAY,
-    answer,
-    clues: [randomChoice(clues)],
-    difficulty: 'hard'
-  };
-}
-
-function generateMiniCrossword() {
-  const across = randomChoice(WORDLE_WORDS);
-  const down = randomChoice(WORDLE_WORDS.filter(w => w[2] === across[2])); // 交叉在第3个字母
+function generatePuzzles() {
+  const today = new Date().toISOString().split('T')[0];
+  const todayId = today.replace(/-/g, '');
   
-  const grid = [
-    across,
-    `..${down[1]}..`,
-    `..${down[2]}..`,
-    `..${down[3]}..`,
-    `..${down[4]}..`
+  const wordleWord = pickRandom(WORDLE_WORDS);
+  const wordhurdleWord = pickRandom(WORDHURDLE_WORDS);
+  const anagramIdx = Math.floor(Math.random() * ANAGRAM_WORDS.length);
+  const crossword = pickRandom(CROSSWORD_GRIDS);
+  const wordsearch = pickRandom(WORDSEARCH_GRIDS);
+  
+  const wordleClues = [
+    `A 5-letter word starting with ${wordleWord[0]}`,
+    `Ends with "${wordleWord[4]}"`,
+    `Meaning: related to ${wordleWord.toLowerCase()}`
   ];
   
-  const answers = {
-    '00': across[0], '01': across[1], '02': across[2], '03': across[3], '04': across[4],
-    '12': down[1], '22': down[2], '32': down[3], '42': down[4]
-  };
+  const wordhurdleClues = [
+    `A 6-letter word starting with ${wordhurdleWord[0]}`,
+    `Ends with "${wordhurdleWord[5]}"`,
+    `Category: ${wordhurdleWord.toLowerCase()} related`
+  ];
   
-  return {
-    id: `crossword-${DATE_ID}`,
-    type: 'mini-crossword',
-    date: TODAY,
-    grid,
-    numbers: {
-      'A1': `1-Across: ${across.toLowerCase()}`,
-      'D3': `2-Down: ${down.toLowerCase()}`
+  return [
+    {
+      id: `wordle-${todayId}`,
+      type: 'wordle',
+      date: today,
+      answer: wordleWord,
+      clues: wordleClues,
+      difficulty: 'medium'
     },
-    answers
-  };
+    {
+      id: `wh-${todayId}`,
+      type: 'wordhurdle',
+      date: today,
+      answer: wordhurdleWord,
+      clues: wordhurdleClues,
+      difficulty: 'hard'
+    },
+    {
+      id: `crossword-${todayId}`,
+      type: 'mini-crossword',
+      date: today,
+      grid: crossword.grid,
+      numbers: crossword.numbers,
+      answers: crossword.answers,
+      clues: [
+        `Across 1: ${crossword.numbers['A1']?.split(': ')[1] || 'A word'}`,
+        `Down 2: ${crossword.numbers['D2']?.split(': ')[1] || 'A word'}`,
+        `Grid is 5x5 with black cells marked as .`
+      ]
+    },
+    {
+      id: `anagram-${todayId}`,
+      type: 'anagram',
+      date: today,
+      scrambled: ANAGRAM_SCRAMBLED[anagramIdx],
+      answer: ANAGRAM_WORDS[anagramIdx],
+      hint: 'Unscramble the letters',
+      clues: [
+        `Scrambled: ${ANAGRAM_SCRAMBLED[anagramIdx]}`,
+        `Length: ${ANAGRAM_WORDS[anagramIdx].length} letters`,
+        `Hint: ${ANAGRAM_WORDS[anagramIdx].toLowerCase()} related`
+      ]
+    },
+    {
+      id: `wordsearch-${todayId}`,
+      type: 'wordsearch',
+      date: today,
+      grid: wordsearch.grid,
+      words: wordsearch.words,
+      theme: wordsearch.theme,
+      clues: [
+        `Theme: ${wordsearch.theme}`,
+        `Find ${wordsearch.words.length} hidden words`,
+        `Grid size: 5x5 letters`
+      ]
+    }
+  ];
 }
 
-function generateAnagram() {
-  const pair = randomChoice(ANAGRAM_PAIRS);
-  return {
-    id: `anagram-${DATE_ID}`,
-    type: 'anagram',
-    date: TODAY,
-    scrambled: pair.scrambled,
-    answer: pair.answer,
-    hint: pair.hint
-  };
-}
-
-function generateWordSearch() {
-  const themes = ['Animals', 'Colors', 'Fruits', 'Countries', 'Sports'];
-  const theme = randomChoice(themes);
-  const words = {
-    'Animals': ['TIGER', 'EAGLE', 'SHARK', 'WOLF', 'BEAR'],
-    'Colors': ['BLUE', 'RED', 'GREEN', 'YELLOW', 'PINK'],
-    'Fruits': ['APPLE', 'MANGO', 'GRAPE', 'PEACH', 'LEMON'],
-    'Countries': ['CHINA', 'JAPAN', 'INDIA', 'BRAZIL', 'EGYPT'],
-    'Sports': ['SOCCER', 'TENNIS', 'GOLF', 'SWIM', 'RUGBY']
-  }[theme];
-  
-  // 简单 5x5 网格填充字母
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const grid = Array(5).fill().map(() => 
-    Array(5).fill().map(() => randomChoice(letters)).join('')
-  );
-  
-  return {
-    id: `wordsearch-${DATE_ID}`,
-    type: 'wordsearch',
-    date: TODAY,
-    grid,
-    words: words.slice(0, 3),
-    theme
-  };
-}
-
-const TODAY = new Date().toISOString().split('T')[0];
-const DATE_ID = TODAY.replace(/-/g, '');
-
-async function main() {
-  console.log('🤖 Generating daily puzzles (local)...');
+function main() {
+  console.log('🤖 Generating daily puzzles locally...');
   
   const dataDir = path.join(__dirname, '..', 'data');
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
   
-  const puzzles = [
-    generateWordle(),
-    generateWordHurdle(),
-    generateMiniCrossword(),
-    generateAnagram(),
-    generateWordSearch()
-  ];
-  
-  const output = { generated: TODAY, count: puzzles.length, puzzles };
-  
-  fs.writeFileSync(path.join(dataDir, `puzzles-${TODAY}.json`), JSON.stringify(output, null, 2));
-  console.log(`✅ Generated ${puzzles.length} puzzles`);
-  
-  fs.writeFileSync(path.join(dataDir, 'latest.json'), JSON.stringify(output, null, 2));
-  console.log('✅ Updated data/latest.json');
+  try {
+    const puzzles = generatePuzzles();
+    const today = new Date().toISOString().split('T')[0];
+    const output = { generated: today, count: puzzles.length, puzzles };
+    
+    fs.writeFileSync(path.join(dataDir, `puzzles-${today}.json`), JSON.stringify(output, null, 2));
+    console.log(`✅ Generated ${puzzles.length} puzzles`);
+    
+    fs.writeFileSync(path.join(dataDir, 'latest.json'), JSON.stringify(output, null, 2));
+    console.log('✅ Updated data/latest.json');
+  } catch (err) {
+    console.error('❌ Error:', err.message);
+    process.exit(1);
+  }
 }
 
-main().catch(err => {
-  console.error('❌ Error:', err.message);
-  process.exit(1);
-});
+main();
