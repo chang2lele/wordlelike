@@ -1,7 +1,8 @@
 name: Generate Daily Puzzles
+
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * *'  # 06:00 UTC = 14:00 Beijing
   workflow_dispatch:
 
 permissions:
@@ -17,23 +18,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
       
-      - name: Install dependencies
-        run: cd puzzle-generator && npm install
-      
-      - name: Generate puzzles
-        run: cd puzzle-generator && node generate-puzzles.js
-        env:
-          AI_API_KEY: ${{ secrets.AI_API_KEY }}
-          AI_API_URL: ${{ secrets.AI_API_URL }}
-          AI_MODEL: ${{ secrets.AI_MODEL }}
+      - name: Generate puzzles locally
+        run: |
+          cd puzzle-generator
+          node generate-puzzles-local.js
       
       - name: Commit and push puzzles
         run: |
-          git config user.name "WordleLike Bot"
-          git config user.email "bot@wordlelike.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/
-          git diff --staged --quiet || (
-            git commit -m "Daily puzzle update $(date +%Y-%m-%d)" &&
-            git push
-          )
+          git diff --staged --quiet || git commit -m "chore: update daily puzzles $(date +'%Y-%m-%d')"
+          git push
