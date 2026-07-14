@@ -19,10 +19,12 @@ jobs:
         with:
           node-version: '22'
       
-      - name: Generate puzzles locally
+      - name: Generate puzzles via AI
         run: |
           cd puzzle-generator
-          node generate-puzzles-local.js
+          node generate-puzzles.js
+        env:
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
       
       - name: Commit and push puzzles
         run: |
