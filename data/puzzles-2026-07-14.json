@@ -6,11 +6,9 @@
       "id": "wordle-20260714",
       "type": "wordle",
       "date": "2026-07-14",
-      "answer": "OCEAN",
+      "answer": "CRANE",
       "clues": [
-        "A 5-letter word starting with O",
-        "Ends with \"N\"",
-        "Meaning: related to ocean"
+        "A bird or a construction tool"
       ],
       "difficulty": "medium"
     },
@@ -18,11 +16,9 @@
       "id": "wh-20260714",
       "type": "wordhurdle",
       "date": "2026-07-14",
-      "answer": "FROSTY",
+      "answer": "PLANET",
       "clues": [
-        "A 6-letter word starting with F",
-        "Ends with \"Y\"",
-        "Category: frosty related"
+        "Earth is one"
       ],
       "difficulty": "hard"
     },
@@ -32,67 +28,51 @@
       "date": "2026-07-14",
       "grid": [
         "CRANE",
-        "A....",
-        "..T..",
-        ".S...",
+        "H....",
+        "..N..",
+        ".A...",
         "..E.."
       ],
       "numbers": {
-        "A1": "1-Across: A bird",
-        "D2": "2-Down: Article"
+        "A1": "1-Across: Bird or tool",
+        "D2": "2-Down: Greeting"
       },
       "answers": {
-        "10": "A",
-        "20": "T",
-        "30": "S",
+        "10": "H",
+        "20": "N",
+        "30": "A",
         "40": "E",
         "00": "C",
         "01": "R",
         "02": "A",
         "03": "N",
         "04": "E"
-      },
-      "clues": [
-        "Across 1: A bird",
-        "Down 2: Article",
-        "Grid is 5x5 with black cells marked as ."
-      ]
+      }
     },
     {
       "id": "anagram-20260714",
       "type": "anagram",
       "date": "2026-07-14",
-      "scrambled": "EILNST",
-      "answer": "LISTEN",
-      "hint": "Unscramble the letters",
-      "clues": [
-        "Scrambled: EILNST",
-        "Length: 6 letters",
-        "Hint: listen related"
-      ]
+      "scrambled": "EARTHN",
+      "answer": "EARTH N",
+      "hint": "Planet"
     },
     {
       "id": "wordsearch-20260714",
       "type": "wordsearch",
       "date": "2026-07-14",
       "grid": [
-        "APPLE",
-        "BANAN",
-        "CHERR",
-        "DURIA",
-        "ELDER"
+        "ABCDE",
+        "FGHIJ",
+        "KLMNO",
+        "PQRST",
+        "UVWXY"
       ],
       "words": [
-        "APPLE",
-        "BANANA",
-        "CHERRY"
+        "SKY",
+        "STAR"
       ],
-      "theme": "Fruits",
-      "clues": [
-        "Theme: Fruits",
-        "Find 3 hidden words",
-        "Grid size: 5x5 letters"
-      ]
+      "theme": "Space"
     }
   ]
 }
