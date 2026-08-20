@@ -8,3 +8,6 @@ Allow: /favicon.svg
 Disallow: /puzzle-generator/
 
 Sitemap: https://wordlelike.com/sitemap.xml
+
+# IndexNow
+IndexNow: c251dd497b694d589ef6ff67d013da6a
