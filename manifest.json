@@ -1,0 +1,47 @@
+{
+    "name": "WordleLike - Daily Games Like Wordle",
+    "short_name": "WordleLike",
+    "description": "Free daily word puzzle games like Wordle. Play Word Hurdle, Mini Crossword, Word Search & Anagram. No sign-up required.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#ffffff",
+    "theme_color": "#6c5ce7",
+    "categories": ["games", "puzzle", "education"],
+    "icons": [
+        {
+            "src": "/icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Word Hurdle",
+            "url": "/word-hurdle",
+            "description": "6-letter daily word puzzle"
+        },
+        {
+            "name": "Mini Crossword",
+            "url": "/mini-crossword",
+            "description": "Quick daily crossword"
+        },
+        {
+            "name": "Word Search",
+            "url": "/word-search",
+            "description": "Find hidden words in the grid"
+        },
+        {
+            "name": "Anagram Solver",
+            "url": "/anagram",
+            "description": "Unscramble letters to form words"
+        }
+    ]
+}
